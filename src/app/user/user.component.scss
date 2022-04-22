@@ -1,0 +1,14 @@
+$vw-viewport: 1342;
+@function get-vw($font){
+    $vw-context: $vw-viewport * 0.01 * 1px;
+    @return $font / $vw-context * 1vw;
+    @return $font;
+  }
+#user {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: get-vw(300px);
+    .user_info-name {
+        white-space: nowrap;
+    }
+}

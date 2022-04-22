@@ -1,0 +1,52 @@
+<div class="" v-if="usersList">
+    <div class="container-fluid">
+         <!-- First level -->
+        <div class="row">        
+            <div   *ngFor="let user of modifiedUsersList">
+                <div *ngIf="!user.parent_id "> 
+                    <app-user  [userObj]="user" ></app-user>
+                     <!-- second level -->
+                    <div class="row" *ngIf="user.children.length > 0">
+                        <div   [ngClass]="{
+                            'col-md-6':user.children.length == 2,
+                            'col-md-12':user.children.length == 1
+                        }" *ngFor="let secondUserObjChild of user.children">
+                            <app-user  [userObj]="secondUserObjChild" class="w-50"></app-user>
+
+                            <!-- Third level -->
+                            <div class="row" *ngIf="secondUserObjChild.children.length > 0 "> 
+                                 <div  [ngClass]="{
+                                            'col-md-6':secondUserObjChild.children.length == 2,
+                                            'col-md-12':secondUserObjChild.children.length == 1
+                                        }"
+                                         *ngFor="let thirdUserObjChild of secondUserObjChild.children">
+                                    <app-user  [userObj]="thirdUserObjChild" *ngIf="secondUserObjChild.id == thirdUserObjChild.parent_id"></app-user>
+                                    <!-- Fourth level -->
+                                    <div class="row" *ngIf="thirdUserObjChild.children.length > 0 "> 
+                                        <div  [ngClass]="{
+                                            'col-md-6':thirdUserObjChild.children.length == 2,
+                                            'col-md-12':thirdUserObjChild.children.length == 1
+                                        }"*ngFor="let fourUserObjChild of thirdUserObjChild.children">
+                                           <app-user  [userObj]="fourUserObjChild" *ngIf="secondUserObjChild.id == thirdUserObjChild.parent_id"></app-user>
+                                       </div> 
+                                   </div>
+
+                                </div> 
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+               
+            </div>
+            
+            
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+
+</div>
+<!-- {{userData | json}} -->
